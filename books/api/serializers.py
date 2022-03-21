@@ -2,9 +2,9 @@
 #https://youtu.be/wtl8ZyCbTbg?t=787
 
 from rest_framework import serializers
-from Books import models
+from books import models
 
-class BooksSerializer(serializers.ModelSeriealizer):
+class BooksSerializer(serializers.ModelSerializer):
   class Meta:
     model = models.Books
     fields = [
