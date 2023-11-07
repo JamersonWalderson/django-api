@@ -5,5 +5,7 @@ Projeto criado com base no vídeo 'COMO CRIAR UMA API REST DO ZERO COM DJANGO RE
 ## Como instalar
 
 - pip intall -r requirements.txt
+- python manage.py makemigrations
+- python manage.py migrate
 - git clone https://github.com/JamersonWalderson/django-api-books.git
 - python manage.py migrate
