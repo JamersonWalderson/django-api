@@ -14,10 +14,11 @@ export default function Home() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${session.accessToken}`,
+            Authorization: `Bearer ${session.access}`,
           },
         });
         console.log(result)
+        console.log(session.access)
         const json = await result.json();
         setData(json);
       })();

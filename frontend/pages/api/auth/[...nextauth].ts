@@ -35,7 +35,7 @@ async function refreshAccessToken(token: JWT): Promise<JWT | null> {
 }
 
 export const authOptions: AuthOptions = {
-  session: { strategy: "jwt", maxAge: 10 },
+  session: { strategy: "jwt", maxAge: 60 * 60 * 24 * 30 },
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
     CredentialsProvider({
@@ -111,8 +111,14 @@ export const authOptions: AuthOptions = {
         return user as JWT;
       }
 
+      // Obtenha o tempo atual em milissegundos desde o Unix Epoch
+      const currentTime = Date.now();
+
+      // Converta o tempo de expiração do token para milissegundos desde o Unix Epoch
+      const tokenExpirationTime = new Date(token.exp * 1000)
+      tokenExpirationTime.setDate(tokenExpirationTime.getDate() + 1);
       // Return previous token if the access token has not expired
-      if (Date.now() < token.exp * 100) {
+      if (currentTime < tokenExpirationTime) {
         return token;
       }
 
