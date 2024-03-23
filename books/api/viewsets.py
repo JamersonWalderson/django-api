@@ -3,11 +3,12 @@ from rest_framework import viewsets
 from rest_framework import status
 from books.api import serializers
 from books import models
-
+from rest_framework.permissions import IsAuthenticated
 
 class BooksViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.BooksSerializer
     queryset = models.Books.objects.all()
+    permission_classes = [IsAuthenticated]
 
     def create(self, request):
         serializer = self.get_serializer(data=request.data)
