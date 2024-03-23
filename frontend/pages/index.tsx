@@ -1,8 +1,28 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const { data: session, status } = useSession();
+  const [data, setData] = useState([]);
+
+
+  useEffect(() => {
+    if (session) {
+      (async () => {
+        const result = await fetch("http://127.0.0.1:8000/books/", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.accessToken}`,
+          },
+        });
+        console.log(result)
+        const json = await result.json();
+        setData(json);
+      })();
+    }
+  }, [session]);
 
   return (
     <>
@@ -23,6 +43,7 @@ export default function Home() {
             {session ? (
               <>
                 <h1>Hello, you've logged in!</h1>
+                <p>{JSON.stringify(data)}</p>
                 <a
                   href="/api/auth/signout"
                   onClick={(e) => {

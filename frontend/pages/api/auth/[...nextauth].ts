@@ -35,7 +35,7 @@ async function refreshAccessToken(token: JWT): Promise<JWT | null> {
 }
 
 export const authOptions: AuthOptions = {
-  session: { strategy: "jwt" },
+  session: { strategy: "jwt", maxAge: 10 },
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
     CredentialsProvider({
