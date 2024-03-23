@@ -9,3 +9,4 @@ Projeto criado com base no vídeo 'COMO CRIAR UMA API REST DO ZERO COM DJANGO RE
 - pip install -r requirements.txt
 - python manage.py makemigrations
 - python manage.py migrate
+- python manage.py createsuperuser
