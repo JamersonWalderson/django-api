@@ -5,6 +5,7 @@ from books.api import serializers
 from books import models
 from rest_framework.permissions import IsAuthenticated
 
+
 class BooksViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.BooksSerializer
     queryset = models.Books.objects.all()
@@ -30,3 +31,9 @@ class BooksViewSet(viewsets.ModelViewSet):
                 },
                 status=status.HTTP_400_BAD_REQUEST,
             )
+
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.AuthorSerializer
+    queryset = models.Author.objects.all()
+    permission_classes = [IsAuthenticated]

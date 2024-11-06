@@ -24,6 +24,7 @@ from books.api import viewsets as booksviewsets
 route = routers.DefaultRouter()
 
 route.register(r"books", booksviewsets.BooksViewSet, basename="Books")
+route.register(r"author", booksviewsets.AuthorViewSet, basename="Author")
 
 urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

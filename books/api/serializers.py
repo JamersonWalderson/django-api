@@ -17,6 +17,12 @@ def random_release_year():
     return str(random.randrange(1900, 2022))
 
 
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Author
+        fields = "__all__"
+
+
 class BooksSerializer(serializers.ModelSerializer):
     title = serializers.CharField(default="lorem ipsum")
     author = serializers.CharField(default="lorem ipsum")
@@ -24,6 +30,7 @@ class BooksSerializer(serializers.ModelSerializer):
     publish_company = serializers.CharField(default="lorem ipsum")
     pages = serializers.IntegerField(default=random_page)
     release_year = serializers.IntegerField(default=random_release_year)
+    authors = AuthorSerializer(many=True, read_only=True)
 
     class Meta:
         model = models.Books
@@ -36,6 +43,5 @@ class BooksSerializer(serializers.ModelSerializer):
             "pages",
             "publish_company",
             "create_at",
+            "authors",
         ]
-        querySet = models.Books.objects.all()
-        # fields = '__ALL__'
